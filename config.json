@@ -1,3 +1,4 @@
 {
-	"blockedDomains": ["youtube.com", "twitter.com", "x.com"]
+	"blockedDomains": ["youtube.com", "twitter.com", "x.com"],
+	"allowedDomains": ["music.youtube.com"]
 }

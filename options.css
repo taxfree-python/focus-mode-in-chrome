@@ -84,12 +84,14 @@ h2 {
 	text-align: left;
 }
 
-#domain-list {
+#domain-list,
+#allowed-list {
 	list-style: none;
 	margin-bottom: 16px;
 }
 
-#domain-list li {
+#domain-list li,
+#allowed-list li {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -102,16 +104,19 @@ h2 {
 	transition: background 0.15s;
 }
 
-#domain-list li:hover {
+#domain-list li:hover,
+#allowed-list li:hover {
 	background: rgba(138, 100, 255, 0.08);
 }
 
-#domain-list li .domain-name {
+#domain-list li .domain-name,
+#allowed-list li .domain-name {
 	color: #c4b5fd;
 	font-family: ui-monospace, "SF Mono", monospace;
 }
 
-#domain-list li button {
+#domain-list li button,
+#allowed-list li button {
 	background: rgba(239, 68, 68, 0.15);
 	color: #f87171;
 	border: 1px solid rgba(239, 68, 68, 0.2);
@@ -124,7 +129,8 @@ h2 {
 		box-shadow 0.15s;
 }
 
-#domain-list li button:hover {
+#domain-list li button:hover,
+#allowed-list li button:hover {
 	background: rgba(239, 68, 68, 0.25);
 	box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
 }

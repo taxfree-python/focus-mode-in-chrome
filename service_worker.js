@@ -1,16 +1,20 @@
-async function getBlockedDomains() {
-	const { blockedDomains } = await chrome.storage.local.get({
+async function getLists() {
+	const { blockedDomains, allowedDomains } = await chrome.storage.local.get({
 		blockedDomains: [],
+		allowedDomains: [],
 	});
-	return blockedDomains;
+	return { blockedDomains, allowedDomains };
 }
 
-function isBlocked(url, blockedDomains) {
+function matchesDomain(hostname, domain) {
+	return hostname === domain || hostname.endsWith(`.${domain}`);
+}
+
+function isBlocked(url, blockedDomains, allowedDomains) {
 	try {
 		const hostname = new URL(url).hostname;
-		return blockedDomains.some(
-			(domain) => hostname === domain || hostname.endsWith(`.${domain}`),
-		);
+		if (allowedDomains.some((d) => matchesDomain(hostname, d))) return false;
+		return blockedDomains.some((d) => matchesDomain(hostname, d));
 	} catch {
 		return false;
 	}
@@ -45,8 +49,8 @@ async function maybeBlock(tabId, url) {
 
 	if (url.startsWith(chrome.runtime.getURL("blocked.html"))) return;
 
-	const blockedDomains = await getBlockedDomains();
-	if (isBlocked(url, blockedDomains)) {
+	const { blockedDomains, allowedDomains } = await getLists();
+	if (isBlocked(url, blockedDomains, allowedDomains)) {
 		await incrementBlockCount();
 		const blockedUrl = `${chrome.runtime.getURL("blocked.html")}?src=${encodeURIComponent(url)}`;
 		await chrome.tabs.update(tabId, { url: blockedUrl });
@@ -73,15 +77,21 @@ chrome.runtime.onInstalled.addListener(async () => {
 	const { focusEnabled } = await getState();
 	await setBadge(focusEnabled);
 
-	// 既存のドメイン設定がなければ config.json からデフォルトを読み込む
-	const { blockedDomains } = await chrome.storage.local.get("blockedDomains");
-	if (!blockedDomains) {
+	// 既存の設定がなければ config.json からデフォルトを読み込む
+	const stored = await chrome.storage.local.get([
+		"blockedDomains",
+		"allowedDomains",
+	]);
+	if (!stored.blockedDomains || !stored.allowedDomains) {
 		try {
 			const resp = await fetch(chrome.runtime.getURL("config.json"));
 			const config = await resp.json();
-			await chrome.storage.local.set({
-				blockedDomains: config.blockedDomains,
-			});
+			const defaults = {};
+			if (!stored.blockedDomains)
+				defaults.blockedDomains = config.blockedDomains;
+			if (!stored.allowedDomains)
+				defaults.allowedDomains = config.allowedDomains;
+			await chrome.storage.local.set(defaults);
 		} catch (e) {
 			console.error("Failed to load default config:", e);
 		}
