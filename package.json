@@ -1,0 +1,25 @@
+{
+	"name": "focus-mode-in-chrome",
+	"version": "1.0.0",
+	"description": "集中モード中に気が散るサイトをブロックする Chrome 拡張機能です。",
+	"main": "blocked.js",
+	"scripts": {
+		"lint": "biome check .",
+		"format": "biome check --fix ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/taxfree-python/focus-mode-in-chrome.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/taxfree-python/focus-mode-in-chrome/issues"
+	},
+	"homepage": "https://github.com/taxfree-python/focus-mode-in-chrome#readme",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.0"
+	}
+}

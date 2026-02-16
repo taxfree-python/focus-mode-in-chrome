@@ -1,17 +1,14 @@
 {
-  "manifest_version": 3,
-  "name": "Focus Shield Simple",
-  "version": "0.1.0",
-  "description": "集中モード中は YouTube / X(Twitter) をブロック画面に置き換えます。",
-  "action": { "default_title": "Focus Shield" },
-  "background": { "service_worker": "service_worker.js" },
-  "permissions": ["storage", "tabs"],
-  "host_permissions": [
-    "*://*.youtube.com/*",
-    "*://youtube.com/*",
-    "*://*.twitter.com/*",
-    "*://twitter.com/*",
-    "*://*.x.com/*",
-    "*://x.com/*"
-  ]
+	"manifest_version": 3,
+	"name": "Focus Shield Simple",
+	"version": "0.2.0",
+	"description": "集中モード中は設定したサイトをブロック画面に置き換えます。",
+	"action": { "default_title": "Focus Shield" },
+	"background": { "service_worker": "service_worker.js" },
+	"permissions": ["storage", "tabs"],
+	"host_permissions": ["<all_urls>"],
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": true
+	}
 }
