@@ -3,7 +3,20 @@
 	"name": "Focus Shield Simple",
 	"version": "0.2.0",
 	"description": "集中モード中は設定したサイトをブロック画面に置き換えます。",
-	"action": { "default_title": "Focus Shield" },
+	"icons": {
+		"16": "icon16.png",
+		"32": "icon32.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	"action": {
+		"default_title": "Focus Shield",
+		"default_icon": {
+			"16": "icon16.png",
+			"32": "icon32.png",
+			"48": "icon48.png"
+		}
+	},
 	"background": { "service_worker": "service_worker.js" },
 	"permissions": ["storage", "tabs"],
 	"host_permissions": ["<all_urls>"],

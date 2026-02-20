@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.25)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield shape -->
+  <path
+    d="M64 8 L16 30 L16 58 C16 88 36 112 64 122 C92 112 112 88 112 58 L112 30 Z"
+    fill="url(#bg)"
+    stroke="url(#edge)"
+    stroke-width="3"
+  />
+  <!-- Inner highlight for depth -->
+  <path
+    d="M64 16 L24 34 L24 58 C24 84 41 105 64 114 C87 105 104 84 104 58 L104 34 Z"
+    fill="url(#shine)"
+  />
+</svg>
